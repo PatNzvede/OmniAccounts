@@ -1,0 +1,36 @@
+﻿@model BarcodeCombined.Models.stock_export
+
+<h2>Type in the barcode to search for</h2>
+<br />
+<style ="text/css">
+    body {
+        text-align: center;
+    }
+
+    form {
+        display: inline-block;
+    }
+</style>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bar_code, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bar_code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bar_code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="GetDetails" class="btn btn-primary" onclick="location.href='@Url.Action("ProcessDetails", "Home")?searchText=' + document.getElementById('txtSearch').value; return false;'" />
+            </div>
+        </div>
+    </div>
+
+
+}
